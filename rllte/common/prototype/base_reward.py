@@ -81,9 +81,9 @@ class BaseReward(ABC):
         self.rwd_norm_type = rwd_norm_type
         self.obs_norm_type = obs_norm_type
         # build the running mean and std for normalization
-        self.rwd_norm = TorchRunningMeanStd() if self.rwd_norm_type == "rms" else None
+        self.rwd_norm = TorchRunningMeanStd(device=device) if self.rwd_norm_type == "rms" else None
         self.obs_norm = (
-            TorchRunningMeanStd(shape=self.obs_shape)
+            TorchRunningMeanStd(shape=self.obs_shape, device=device)
             if self.obs_norm_type == "rms"
             else None
         )
